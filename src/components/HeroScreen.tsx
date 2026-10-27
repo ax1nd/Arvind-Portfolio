@@ -142,7 +142,7 @@ export function HeroScreen({ onNavigate }: HeroScreenProps) {
 
           {/* Subtitle */}
           <p className="mt-8 max-w-xl mx-auto font-mono text-xs sm:text-sm text-[#8e8e8e] leading-relaxed tracking-wide">
-            Arvind is a Computer Science Engineer & Systems Architect based in Chennai. Engineering zero-allocation distributed consensus, GPU radiance pipelines, and optimizing compiler runtimes.
+            Arvind is a Computer Science student chasing the space where art meets engineering. He tells stories through design, bending code into color, motion and meaning.
           </p>
 
           {/* Center navigation shortcuts to other screens in the video */}

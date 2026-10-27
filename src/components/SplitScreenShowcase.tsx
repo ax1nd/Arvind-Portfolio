@@ -1,134 +1,85 @@
 import { useState } from 'react';
 import { Project, ScreenId } from '../types.ts';
-import { PROJECTS } from '../data/projects.ts';
 import { sound } from '../utils/audio.ts';
 
 interface SplitScreenShowcaseProps {
   onNavigate: (screen: ScreenId, label: string) => void;
-  onOpenCaseStudy: (project: Project) => void;
+  onOpenCaseStudy?: (project: Project) => void;
 }
 
-export function SplitScreenShowcase({ onOpenCaseStudy }: SplitScreenShowcaseProps) {
-  const [selectedIdx, setSelectedIdx] = useState(0);
+export function SplitScreenShowcase({ onNavigate }: SplitScreenShowcaseProps) {
   const [isRotating, setIsRotating] = useState(true);
-
-  const currentProject = PROJECTS[selectedIdx];
-
-  const handleNextProject = () => {
-    sound.play('switch');
-    setSelectedIdx((prev) => (prev + 1) % PROJECTS.length);
-  };
-
-  const handlePrevProject = () => {
-    sound.play('switch');
-    setSelectedIdx((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
-  };
 
   return (
     <div className="relative min-h-[calc(100vh-115px)] flex flex-col justify-between overflow-hidden select-none">
       {/* Main Split Screen Container */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 relative">
-        {/* LEFT HALF: Colored field with inverted mirrored typography (Video 00:21) */}
+        {/* LEFT HALF: Lime field with inverted mirrored typography */}
         <div
-          className="relative min-h-[380px] md:min-h-full p-6 sm:p-12 flex flex-col justify-between transition-colors duration-200 border-b md:border-b-0 md:border-r border-[#2a2a2a]"
-          style={{ backgroundColor: currentProject.accentColor }}
+          className="relative min-h-[380px] md:min-h-full p-6 sm:p-12 flex flex-col justify-between transition-colors duration-200 border-b md:border-b-0 md:border-r border-[#2a2a2a] bg-[#d4ff00]"
         >
           {/* Top banner */}
           <div className="flex items-center justify-between text-[#0a0a0a] font-mono text-xs uppercase tracking-widest font-bold">
-            <span className="bg-[#0a0a0a] text-[#f5f5f5] px-2 py-0.5">
-              [{currentProject.index} / 0{PROJECTS.length}]
-            </span>
-            <span className="hidden sm:inline">INVERTED PLANE</span>
-            <span>{currentProject.year}</span>
+            <span>ABOUT ME</span>
+            <span>2026</span>
           </div>
 
-          {/* Center inverted / upside down mirrored typography (as in video 00:21) */}
-          <div className="my-auto py-8">
-            <div
-              className="transform rotate-180 scale-x-[-1] text-right font-syne font-black text-4xl sm:text-6xl lg:text-7xl leading-none text-[#0a0a0a] uppercase tracking-tighter"
-              title="Mirrored Typography"
-            >
-              <span>({currentProject.index}) </span>
-              <br />
-              <span>Change the</span>
-              <br />
-              <span>rules</span>
-              <div className="font-mono text-xs font-bold text-[#0a0a0a] uppercase tracking-widest mt-3">
-                // {currentProject.title}
-              </div>
-            </div>
+          {/* Center inverted / upside-down typography matching attached reference image */}
+          <div className="my-auto py-6 sm:py-10 flex items-center justify-center w-full">
+            <img
+              src="/assets/aistudio/image_60199aa8.png"
+              alt="DREAM DESIGN DEPLOY"
+              className="w-full max-w-lg max-h-[360px] sm:max-h-[440px] object-contain mix-blend-multiply select-none"
+            />
           </div>
 
           {/* Bottom metadata */}
           <div className="flex items-center justify-between text-[#0a0a0a] font-mono text-xs uppercase font-bold">
-            <span>{currentProject.client}</span>
-            <button
-              onClick={handlePrevProject}
-              className="border-2 border-[#0a0a0a] bg-transparent hover:bg-[#0a0a0a] hover:text-[#f5f5f5] px-3 py-1 transition-colors cursor-pointer"
-            >
-              ← PREV
-            </button>
+            <span>VISUAL STORYTELLER / CS STUDENT</span>
           </div>
         </div>
 
-        {/* RIGHT HALF: Pitch black void with stark typography and circular manifesto (Video 00:22) */}
+        {/* RIGHT HALF: Pitch black void with stark typography and About Me box */}
         <div className="relative min-h-[380px] md:min-h-full bg-[#0a0a0a] p-6 sm:p-12 flex flex-col justify-between">
           {/* Top banner */}
           <div className="flex items-center justify-between text-[#8e8e8e] font-mono text-xs uppercase tracking-widest">
             <span className="text-[#f5f5f5]">
-              DISCIPLINE: {currentProject.discipline.toUpperCase()}
+              DISCIPLINE: DESIGN x CODE x STORYTELLING
             </span>
-            <button
-              onClick={handleNextProject}
-              className="border border-[#2a2a2a] hover:border-[#d4ff00] text-[#f5f5f5] hover:text-[#d4ff00] px-3 py-1 transition-colors cursor-pointer"
-            >
-              NEXT [0{(selectedIdx + 1) % PROJECTS.length + 1}] →
-            </button>
           </div>
 
-          {/* Main upright typography */}
-          <div className="my-auto py-8">
+          {/* Main upright content */}
+          <div className="my-auto py-6 sm:py-8 w-full max-w-xl">
+            {/* Header with lime parenthesis accent */}
             <div className="font-syne font-black text-4xl sm:text-6xl lg:text-7xl leading-none text-[#f5f5f5] uppercase tracking-tighter">
-              <span className="text-[#d4ff00]">({currentProject.index}) </span>
-              <br />
-              <span>Change the</span>
+              <span className="text-[#d4ff00] text-xl sm:text-3xl block mb-2 font-mono tracking-widest">
+                (ARVIND)
+              </span>
+              <span>ABOUT ME</span>
             </div>
 
-            {/* Circular text manifesto block from video 00:23 */}
-            <div className="my-8 max-w-sm ml-auto p-4 border border-[#2a2a2a] bg-[#121212] relative">
-              <div className="font-mono text-[10px] text-[#d4ff00] uppercase mb-1 flex items-center justify-between">
-                <span>[MANIFESTO EXCERPT]</span>
+            {/* The Expanded About Me Box */}
+            <div className="my-6 w-full p-6 sm:p-8 border border-[#2a2a2a] hover:border-[#d4ff00] bg-[#121212] transition-colors relative shadow-[4px_4px_0px_#000000]">
+              <div className="font-mono text-[10px] text-[#d4ff00] uppercase mb-4 flex items-center justify-between tracking-wider">
+                <span>[ABOUT ME]</span>
                 <span>CHENNAI STUDIO</span>
               </div>
-              <p className="font-mono text-xs text-[#c5c9ac] leading-relaxed text-justify">
-                {currentProject.manifesto}
+              <p className="font-mono text-xs sm:text-sm text-[#c5c9ac] leading-relaxed text-left">
+                Hi, I'm Arvind, a Computer Science student from Chennai who lives where code meets design. I'm a visual storyteller at heart, turning ideas into interfaces, motion and moments. I believe every project should feel like a story: it starts as a dream, takes shape as a design and ships as something real.
               </p>
-            </div>
-
-            <div className="font-syne font-black text-4xl sm:text-6xl lg:text-7xl leading-none text-[#f5f5f5] uppercase tracking-tighter">
-              <span>rules</span>
-            </div>
-
-            <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-xs">
-              <span className="text-[#d4ff00] font-bold">// {currentProject.title}</span>
-              {currentProject.stack && (
-                <span className="text-[#8e8e8e]">
-                  [{currentProject.stack.slice(0, 3).join(' · ')}]
-                </span>
-              )}
             </div>
           </div>
 
           {/* Bottom actions */}
-          <div className="flex items-center justify-between pt-4 border-t border-[#2a2a2a]">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#2a2a2a]">
             <button
               onClick={() => {
                 sound.play('click');
-                onOpenCaseStudy(currentProject);
+                onNavigate('contact', 'CONTACT');
               }}
-              className="brutal-btn-primary px-5 py-2.5 text-xs tracking-wider cursor-pointer flex items-center gap-2"
+              className="brutal-btn-primary px-6 py-2.5 text-xs tracking-wider cursor-pointer flex items-center gap-2"
             >
-              <span>View Full Case Study</span>
+              <span>SAY HELLO</span>
               <span className="font-mono">↗</span>
             </button>
 
@@ -137,14 +88,14 @@ export function SplitScreenShowcase({ onOpenCaseStudy }: SplitScreenShowcaseProp
                 sound.play('switch');
                 setIsRotating(!isRotating);
               }}
-              className="font-mono text-xs text-[#8e8e8e] hover:text-[#d4ff00] transition-colors uppercase"
+              className="font-mono text-xs text-[#8e8e8e] hover:text-[#d4ff00] transition-colors uppercase cursor-pointer"
             >
               Turntable: {isRotating ? 'ACTIVE' : 'PAUSED'}
             </button>
           </div>
         </div>
 
-        {/* CENTER INTERACTIVE TURNTABLE DISC (Video 00:23) */}
+        {/* CENTER INTERACTIVE TURNTABLE DISC */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto">
           <div
             onClick={() => {
@@ -166,9 +117,9 @@ export function SplitScreenShowcase({ onOpenCaseStudy }: SplitScreenShowcaseProp
                 d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                 fill="none"
               />
-              <text className="font-mono text-[7px] font-bold uppercase tracking-[0.2em] fill-[#0a0a0a]">
+              <text className="font-mono text-[6.8px] font-bold uppercase tracking-[0.22em] fill-[#0a0a0a]">
                 <textPath href="#circlePath" startOffset="0%">
-                  CHANGE THE RULES · ARVIND STUDIO · CHENNAI · 2026 ·
+                  DREAM · DESIGN · DEPLOY · ARVIND · CHENNAI ·
                 </textPath>
               </text>
             </svg>

@@ -241,11 +241,11 @@ export function AlphabetDrumScreen({ onNavigate }: AlphabetDrumScreenProps) {
           title="Stir with mouse or click to shake letters"
         />
 
-        {/* Center arrow icon button (from video 00:16) */}
+        {/* Center arrow icon button */}
         <button
-          onClick={() => onNavigate('split', 'CHANGE THE RULES')}
+          onClick={() => onNavigate('split', 'ABOUT ME')}
           className="absolute z-20 w-12 h-12 bg-[#0a0a0a] hover:bg-[#d4ff00] text-[#f5f5f5] hover:text-[#0a0a0a] border-2 border-[#f5f5f5] hover:border-[#d4ff00] flex items-center justify-center font-syne font-black text-xl transition-all cursor-pointer shadow-[4px_4px_0px_#0a0a0a]"
-          title="Proceed to Split Screen Showcase (Video 00:21)"
+          title="Proceed to About Me Screen"
         >
           ↗
         </button>

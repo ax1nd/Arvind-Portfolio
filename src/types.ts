@@ -18,4 +18,5 @@ export interface Project {
   deliverables: string[];
   metrics?: { label: string; value: string }[];
   githubUrl?: string;
+  liveUrl?: string;
 }

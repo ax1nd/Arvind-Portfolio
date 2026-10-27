@@ -12,7 +12,7 @@ export const PROJECTS: Project[] = [
     category: 'fullstack',
     stack: ['React', 'Python', 'Spring Boot (Java 21)', 'JavaScript', 'Docker', 'Vercel'],
     accentColor: '#d4ff00', // Electric Lime
-    image: '/src/assets/images/cse_dev_terminal_hover_1793086786789.jpg',
+    image: '/assets/aistudio/image_923a47e4.png',
     secondaryImage: '/src/assets/images/cse_compiler_bytecode_1793086787524.jpg',
     description: 'Smart campus platform with SWOT analysis, role-based access for 3 user types, timetable, feedback, PDF export, and classroom booking; deployed on Vercel.',
     manifesto: 'Institutional management requires rigid authorization models paired with actionable institutional intelligence. We architected a unified platform with role-segregated portals, automated SWOT analytics engines, and conflict-free classroom booking dispatch.',
@@ -26,7 +26,8 @@ export const PROJECTS: Project[] = [
       { label: 'User Roles', value: '3 Access Tiers' },
       { label: 'Backend', value: 'Java 21 / Spring' },
       { label: 'Deployment', value: 'Vercel + Docker' }
-    ]
+    ],
+    liveUrl: 'https://ims-swot-analysis.vercel.app'
   },
   {
     id: 'dungeon-dash',
@@ -39,7 +40,7 @@ export const PROJECTS: Project[] = [
     category: 'game-dev',
     stack: ['Godot 4', 'GDScript', 'Finite State Machine', '2D Combat Physics'],
     accentColor: '#ff007f', // Cyber Magenta
-    image: '/src/assets/images/cse_voxel_radiance_1793086786155.jpg',
+    image: '/assets/aistudio/image_77cc04cf.png',
     secondaryImage: '/src/assets/images/cse_quantum_supercomputer_1793086786785.jpg',
     description: '2D game featuring responsive movement, combat, enemy finite-state machines, and predictive multi-phase boss AI with phase transitions, combo attacks, lunge behavior, and centralized damage handling.',
     manifesto: 'Visceral 2D action games require zero input latency and intelligent adversary choreography. We engineered hierarchical state machines governing multi-phase boss encounter loops, adaptive player tracking, and a centralized damage event dispatcher.',
@@ -53,7 +54,8 @@ export const PROJECTS: Project[] = [
       { label: 'Engine', value: 'Godot 4 / GDScript' },
       { label: 'AI Architecture', value: 'Multi-Phase FSM' },
       { label: 'Combat Loop', value: 'Centralized Damage Bus' }
-    ]
+    ],
+    githubUrl: 'https://github.com/ax1nd/Dungeon-Dash'
   },
   {
     id: 'agentic-video-ai',
@@ -66,7 +68,7 @@ export const PROJECTS: Project[] = [
     category: 'agentic-ai',
     stack: ['AI Agents', 'Plugins', 'Python', 'LLM Tool Calling', 'FFmpeg Pipeline'],
     accentColor: '#00f0ff', // Cyan Tracer
-    image: '/src/assets/images/cse_compiler_bytecode_1793086787524.jpg',
+    image: '/assets/aistudio/image_7c07a1c5.png',
     secondaryImage: '/src/assets/images/cse_distributed_kernel_1793086785069.jpg',
     description: 'AI agent designed to cut raw footage and edit videos from natural-language prompts; includes multiple plugins and 12 specialized agents for different tasks.',
     manifesto: 'Video post-production bottlenecks on manual cutting, rough assemblies, and repetitive timeline alignment. By organizing 12 specialized micro-agents across an extensible plugin architecture, prompts translate into rough-cut timeline edits automatically.',

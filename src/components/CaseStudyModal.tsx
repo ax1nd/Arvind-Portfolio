@@ -51,12 +51,55 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
             <div className="font-mono text-xs text-[#d4ff00] uppercase tracking-widest mb-2">
               DISCIPLINE: {project.discipline} · {project.year}
             </div>
-            <h2 className="font-syne font-black text-3xl sm:text-5xl text-[#f5f5f5] uppercase tracking-tight">
-              {project.title}
-            </h2>
-            <p className="mt-3 font-serif italic text-lg sm:text-xl text-[#c5c9ac]">
-              "{project.subtitle}"
-            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="font-syne font-black text-3xl sm:text-5xl text-[#f5f5f5] uppercase tracking-tight">
+                  {project.title}
+                </h2>
+                <p className="mt-3 font-serif italic text-lg sm:text-xl text-[#c5c9ac]">
+                  "{project.subtitle}"
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.play('switch')}
+                    className="px-5 py-3 font-syne font-black text-xs uppercase tracking-wider text-[#0a0a0a] transition-all flex items-center gap-2 cursor-pointer border-2 hover:brightness-110"
+                    style={{
+                      backgroundColor: '#d4ff00',
+                      borderColor: '#d4ff00',
+                      boxShadow: '3px 3px 0px 0px #f5f5f5'
+                    }}
+                  >
+                    <span className="w-2 h-2 bg-[#0a0a0a] animate-pulse"></span>
+                    <span>Visit Live Site</span>
+                    <span className="font-mono text-sm">↗</span>
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.play('switch')}
+                    className="px-5 py-3 font-syne font-black text-xs uppercase tracking-wider text-[#0a0a0a] transition-all flex items-center gap-2 cursor-pointer border-2 hover:brightness-110"
+                    style={{
+                      backgroundColor: '#d4ff00',
+                      borderColor: '#d4ff00',
+                      boxShadow: '3px 3px 0px 0px #f5f5f5'
+                    }}
+                  >
+                    <span className="w-2 h-2 bg-[#0a0a0a] animate-pulse"></span>
+                    <span>View Project</span>
+                    <span className="font-mono text-sm">↗</span>
+                  </a>
+                )}
+              </div>
+            </div>
 
             {/* Tech Stack Chips */}
             {project.stack && (
@@ -139,8 +182,20 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
 
         {/* Modal Bottom Bar */}
         <div className="border-t-2 border-[#2a2a2a] bg-[#1c1c1c] p-4 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <span className="text-[#8e8e8e]">CODEBASE REPOSITORY // ARVIND CHENNAI</span>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.play('pop')}
+                className="border-2 border-[#d4ff00] bg-[#d4ff00] text-[#0a0a0a] hover:bg-transparent hover:text-[#d4ff00] px-3.5 py-1 text-xs font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>Visit Live App</span>
+                <span>↗</span>
+              </a>
+            )}
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
