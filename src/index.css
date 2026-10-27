@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-syne: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  * {
+    border-radius: 0 !important;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0a0a0a;
+    color: #f5f5f5;
+  }
+}
+
+.font-syne {
+  font-family: var(--font-syne);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Brutalist interactive offset utilities */
+.brutal-btn-primary {
+  background-color: #d4ff00;
+  color: #0a0a0a;
+  border: 2px solid #d4ff00;
+  font-family: var(--font-syne);
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+.brutal-btn-primary:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 3px 3px 0px 0px #f5f5f5;
+}
+
+.brutal-btn-outline {
+  background-color: transparent;
+  color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+  font-family: var(--font-mono);
+  transition: all 0.08s steps(2);
+}
+.brutal-btn-outline:hover {
+  background-color: #f5f5f5;
+  color: #0a0a0a;
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0px 0px #d4ff00;
+}
+
+.brutal-btn-cyber {
+  background-color: transparent;
+  color: #ff007f;
+  border: 2px solid #ff007f;
+  font-family: var(--font-mono);
+  transition: all 0.08s steps(2);
+}
+.brutal-btn-cyber:hover {
+  background-color: #ff007f;
+  color: #0a0a0a;
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0px 0px #f5f5f5;
+}
+
+.brutal-card {
+  background-color: #121212;
+  border: 2px solid #2a2a2a;
+  transition: border-color 0.08s steps(2), transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+.brutal-card:hover {
+  border-color: #d4ff00;
+  transform: translate(-3px, -3px);
+  box-shadow: 3px 3px 0px 0px #d4ff00;
+}
+
+/* Rapid jitter & glitch keyframes */
+@keyframes brutal-jitter {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, -3px); }
+  80% { transform: translate(3px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.animate-jitter {
+  animation: brutal-jitter 0.16s infinite steps(2);
+}
+
+@keyframes glitch-slice {
+  0% { clip-path: inset(15% 0 35% 0); transform: translate(-3px, 1px); }
+  25% { clip-path: inset(55% 0 15% 0); transform: translate(4px, -1px); }
+  50% { clip-path: inset(5% 0 65% 0); transform: translate(-3px, 2px); }
+  75% { clip-path: inset(45% 0 35% 0); transform: translate(3px, -2px); }
+  100% { clip-path: inset(75% 0 10% 0); transform: translate(0, 0); }
+}
+
+.glitch-active {
+  animation: glitch-slice 0.2s steps(2) infinite;
+}
+
+/* Subtle scanlines filter */
+.scanlines-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.45) 50%
+  );
+  background-size: 100% 3px;
+  pointer-events: none;
+}
+
+/* Marquee infinite scroll */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 22s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Slow spin */
+@keyframes spin-turntable {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-turntable {
+  animation: spin-turntable 16s linear infinite;
+}

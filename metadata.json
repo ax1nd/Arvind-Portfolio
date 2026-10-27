@@ -1,0 +1,8 @@
+{
+  "name": "Remix Arvind — Neo Brutalist Portfolio",
+  "description": "Portfolio of Arvind",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
