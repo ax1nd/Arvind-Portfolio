@@ -82,7 +82,8 @@ export const PROJECTS: Project[] = [
       { label: 'Swarm Agents', value: '12 Specialists' },
       { label: 'Interface', value: 'Natural Language' },
       { label: 'Architecture', value: 'Modular Plugins' }
-    ]
+    ],
+    status: 'ONGOING'
   },
   {
     id: 'edit-style-finder',
@@ -109,6 +110,7 @@ export const PROJECTS: Project[] = [
       { label: 'Core Intelligence', value: 'Fine-Tuned LLM' },
       { label: 'Training Corpus', value: 'Social Media Datasets' },
       { label: 'Decomposition', value: 'Technique Breakdown' }
-    ]
+    ],
+    status: 'ONGOING'
   }
 ];

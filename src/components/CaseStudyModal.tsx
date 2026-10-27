@@ -98,6 +98,14 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
                     <span className="font-mono text-sm">↗</span>
                   </a>
                 )}
+                {project.status && (
+                  <span
+                    className="px-5 py-3 font-syne font-black text-xs uppercase tracking-wider text-[#8e8e8e] flex items-center gap-2 border-2 border-[#2a2a2a] bg-[#161616] cursor-default select-none shadow-[3px_3px_0px_0px_#0a0a0a]"
+                  >
+                    <span className="w-2 h-2 bg-[#d4ff00] animate-pulse"></span>
+                    <span>{project.status}</span>
+                  </span>
+                )}
               </div>
             </div>
 
@@ -207,6 +215,14 @@ export function CaseStudyModal({ project, onClose }: CaseStudyModalProps) {
                 <span>View Source on GitHub</span>
                 <span>↗</span>
               </a>
+            )}
+            {project.status && (
+              <span
+                className="border border-[#2a2a2a] bg-[#161616] text-[#8e8e8e] px-3.5 py-1 text-xs font-bold uppercase flex items-center gap-1.5 cursor-default select-none"
+              >
+                <span className="w-1.5 h-1.5 bg-[#d4ff00] animate-pulse"></span>
+                <span>{project.status}</span>
+              </span>
             )}
           </div>
           <button

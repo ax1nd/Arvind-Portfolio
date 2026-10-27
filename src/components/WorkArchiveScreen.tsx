@@ -70,6 +70,15 @@ export function WorkArchiveScreen({ onOpenCaseStudy }: WorkArchiveScreenProps) {
                     <span>↗</span>
                   </a>
                 )}
+                {project.status && (
+                  <span
+                    onClick={(e) => e.stopPropagation()}
+                    className="border border-[#2a2a2a] bg-[#121212] text-[#8e8e8e] px-2.5 py-0.5 text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5 cursor-default select-none pointer-events-none"
+                  >
+                    <span className="w-1.5 h-1.5 bg-[#d4ff00] animate-pulse"></span>
+                    <span>{project.status}</span>
+                  </span>
+                )}
                 <span>{project.year}</span>
               </div>
             </div>
@@ -156,6 +165,15 @@ export function WorkArchiveScreen({ onOpenCaseStudy }: WorkArchiveScreenProps) {
                       <span>View Project</span>
                       <span>↗</span>
                     </a>
+                  )}
+                  {project.status && (
+                    <span
+                      onClick={(e) => e.stopPropagation()}
+                      className="px-2.5 py-1 border border-[#2a2a2a] bg-[#161616] text-[#8e8e8e] font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 cursor-default select-none pointer-events-none"
+                    >
+                      <span className="w-1.5 h-1.5 bg-[#d4ff00] animate-pulse"></span>
+                      <span>{project.status}</span>
+                    </span>
                   )}
                   <span className="text-[#d4ff00] group-hover:translate-x-1 transition-transform">
                     Inspect Architecture ↗
