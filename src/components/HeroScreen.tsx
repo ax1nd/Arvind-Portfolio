@@ -169,81 +169,88 @@ export function HeroScreen({ onNavigate }: HeroScreenProps) {
         </div>
       )}
 
-      {/* DYNAMIC HOVER PREVIEW CARDS (matching video 00:06 - 00:10) */}
-      {/* 1. "mind" hover: developer workstation / cognitive architecture */}
+      {/* DYNAMIC HOVER PREVIEW CARDS (using user-provided project assets) */}
+      {/* 1. "mind" hover: College IMS ERP architecture */}
       {hoveredWord === 'mind' && (
         <div 
-          className="fixed top-24 left-1/2 -translate-x-[280px] sm:-translate-x-[360px] z-30 pointer-events-none w-56 sm:w-64 bg-[#0a0a0a] p-2 border-2 border-[#d4ff00] shadow-[6px_6px_0px_#d4ff00] animate-jitter"
+          className="fixed top-24 left-1/2 -translate-x-[280px] sm:-translate-x-[360px] z-30 pointer-events-none w-60 sm:w-72 bg-[#0a0a0a] p-2 border-2 border-[#d4ff00] shadow-[6px_6px_0px_#d4ff00] animate-jitter"
         >
-          <div className="relative aspect-[3/4] overflow-hidden bg-[#0a0a0a]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0a]">
             <img
-              src="/src/assets/images/cse_dev_terminal_hover_1793086786789.jpg"
-              alt="Systems Engineering Lab"
+              src="/assets/aistudio/image_923a47e4.png"
+              alt="College IMS Architecture"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-[#d4ff00] font-mono text-[10px] font-bold uppercase">
             <span>[MIND / ARCHITECTURE]</span>
-            <span>CHENNAI 2026</span>
+            <span>COLLEGE IMS</span>
           </div>
         </div>
       )}
 
-      {/* 2. "dreams" hover: CSE compiler AST & JIT registers */}
+      {/* 2. "dreams" hover: Dungeon Dash 2D Godot 4 combat engine */}
       {hoveredWord === 'dreams' && (
         <div 
-          className="fixed top-20 right-1/2 translate-x-[260px] sm:translate-x-[340px] z-30 pointer-events-none w-56 sm:w-64 bg-[#ff007f] p-2 border-2 border-[#f5f5f5] shadow-[6px_6px_0px_#0a0a0a] animate-jitter"
+          className="fixed top-20 right-1/2 translate-x-[260px] sm:translate-x-[340px] z-30 pointer-events-none w-60 sm:w-72 bg-[#ff007f] p-2 border-2 border-[#f5f5f5] shadow-[6px_6px_0px_#0a0a0a] animate-jitter"
         >
-          <div className="relative aspect-square overflow-hidden bg-[#0a0a0a]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0a]">
             <img
-              src="/src/assets/images/cse_compiler_bytecode_1793086787524.jpg"
-              alt="Compiler AST & JIT Registers"
+              src="/assets/aistudio/image_77cc04cf.png"
+              alt="Dungeon Dash Godot 4 Game"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-[#0a0a0a] font-mono text-[10px] font-bold uppercase">
-            <span>[DREAMS / COMPILER]</span>
-            <span>SSA JIT VM</span>
+            <span>[DREAMS / GAME ENGINE]</span>
+            <span>GODOT 4 DASH</span>
           </div>
         </div>
       )}
 
-      {/* 3. "designs" hover: distributed consensus kernel card */}
+      {/* 3. "designs" hover: Agentic AI video assembly swarm */}
       {hoveredWord === 'designs' && (
         <div 
-          className="fixed bottom-24 right-8 sm:right-24 z-30 pointer-events-none w-56 sm:w-64 bg-[#0a0a0a] p-2 border-2 border-[#1a803b] shadow-[6px_6px_0px_#1a803b]"
+          className="fixed bottom-24 right-8 sm:right-24 z-30 pointer-events-none w-60 sm:w-72 bg-[#0a0a0a] p-2 border-2 border-[#00f0ff] shadow-[6px_6px_0px_#00f0ff]"
         >
-          <div className="relative aspect-[3/4] overflow-hidden bg-[#1c1c1c]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#1c1c1c]">
             <img
-              src="/src/assets/images/cse_distributed_kernel_1793086785069.jpg"
-              alt="Consensus Kernel Architecture"
+              src="/assets/aistudio/image_7c07a1c5.png"
+              alt="Agentic AI Video Assembly"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="mt-2 flex items-center justify-between text-[#1a803b] font-mono text-[10px] font-bold uppercase">
-            <span>[SYSTEM DESIGNS]</span>
-            <span>240K TPS</span>
+          <div className="mt-2 flex items-center justify-between text-[#00f0ff] font-mono text-[10px] font-bold uppercase">
+            <span>[DESIGNS / VIDEO AGENTS]</span>
+            <span>AUTONOMOUS SWARM</span>
           </div>
         </div>
       )}
 
-      {/* 4. "reality" hover: Chennai coordinates card */}
+      {/* 4. "reality" hover: Edit Style Finder + Chennai station */}
       {hoveredWord === 'reality' && (
         <div 
-          className="fixed bottom-24 left-8 sm:left-24 z-30 pointer-events-none w-64 bg-[#121212] p-3 border-2 border-[#f5f5f5] shadow-[6px_6px_0px_#f5f5f5]"
+          className="fixed bottom-20 left-8 sm:left-24 z-30 pointer-events-none w-64 sm:w-72 bg-[#121212] p-2.5 border-2 border-[#1a803b] shadow-[6px_6px_0px_#1a803b] animate-jitter"
         >
-          <div className="font-mono text-[11px] text-[#d4ff00] uppercase mb-1">
-            [BUILT INTO REALITY]
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#0a0a0a] mb-2 border border-[#2a2a2a]">
+            <img
+              src="/assets/aistudio/image_37f2195e.png"
+              alt="Edit Style Finder"
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="font-syne font-bold text-sm text-[#f5f5f5] uppercase">
+          <div className="flex items-center justify-between text-[#1a803b] font-mono text-[10px] font-bold uppercase mb-1">
+            <span>[REALITY / MULTIMODAL]</span>
+            <span>STYLE FINDER</span>
+          </div>
+          <div className="font-syne font-bold text-xs text-[#f5f5f5] uppercase">
             Chennai Engineering Station
           </div>
-          <div className="font-mono text-[10px] text-[#8e8e8e] mt-1">
-            Tamil Nadu · India
-            <br />
+          <div className="font-mono text-[10px] text-[#8e8e8e] mt-0.5">
             Lat 13.0827° N · Lon 80.2707° E
           </div>
         </div>
