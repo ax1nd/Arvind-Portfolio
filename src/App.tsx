@@ -8,9 +8,11 @@ import { WorkArchiveScreen } from './components/WorkArchiveScreen.tsx';
 import { ContactScreen } from './components/ContactScreen.tsx';
 import { BrutalistTransition } from './components/BrutalistTransition.tsx';
 import { CaseStudyModal } from './components/CaseStudyModal.tsx';
+import { CyberpunkLoader } from './components/CyberpunkLoader.tsx';
 import { sound } from './utils/audio.ts';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('hero');
   const [nextScreen, setNextScreen] = useState<ScreenId | null>(null);
   const [transitionLabel, setTransitionLabel] = useState<string>('SYSTEM SHIFT');
@@ -50,11 +52,26 @@ export default function App() {
         <div className="fixed inset-0 z-30 scanlines-overlay pointer-events-none" />
       )}
 
+      {/* Cyberpunk Loading Screen with Cut-Out Layer Mask Transition */}
+      {isLoading && (
+        <CyberpunkLoader onComplete={() => setIsLoading(false)} />
+      )}
+
       {/* Viewport Frame Edge Coordinates (from Kinetic Neo-Brutalist Architecture spec) */}
       <div className="fixed top-1 left-2 z-50 pointer-events-none hidden xl:block font-mono text-[9px] text-[#8e8e8e] tracking-widest uppercase">
         LOC [X: {String(mouseCoords.x).padStart(4, '0')}, Y: {String(mouseCoords.y).padStart(4, '0')}]
       </div>
       <div className="fixed top-1 right-2 z-50 pointer-events-auto hidden xl:flex items-center gap-2 font-mono text-[9px] text-[#8e8e8e]">
+        <button
+          onClick={() => {
+            sound.play('click');
+            setIsLoading(true);
+          }}
+          className="border border-[#2a2a2a] hover:border-[#d4ff00] px-1.5 py-0.5 text-[#8e8e8e] hover:text-[#d4ff00] uppercase transition-colors"
+          title="Replay cyberpunk loading animation and cut-out layer mask transition"
+        >
+          REBOOT SYS
+        </button>
         <button
           onClick={() => {
             sound.play('click');
