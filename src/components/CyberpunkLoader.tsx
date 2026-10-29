@@ -7,25 +7,24 @@ interface CyberpunkLoaderProps {
 
 export function CyberpunkLoader({ onComplete }: CyberpunkLoaderProps) {
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<'booting' | 'cutting' | 'done'>('booting');
+  const [isZooming, setIsZooming] = useState(false);
+  const [zoomScale, setZoomScale] = useState(1);
+  const [overlayOpacity, setOverlayOpacity] = useState(1);
   const [logIndex, setLogIndex] = useState(0);
-  const [cutoutScale, setCutoutScale] = useState(0);
   const isSkippedRef = useRef(false);
 
   const BOOT_LOGS = [
-    'INIT KERNEL 6.12 // ARVIND.SYS // CHENNAI NODE',
-    'MOUNTING FILE_SYSTEM: /dev/nvme0n1p2 [OK]',
-    'ALLOCATING NEURAL HEAP: 64TB QUANTUM REGS',
-    'COMPILING SSA JIT RUNTIME & SHADERS [OK]',
-    'CALIBRATING GPU SPATIAL RADIANCE PIPELINE',
+    'MOUNTING FILE_SYSTEM // CHENNAI NODE',
+    'ALLOCATING NEURAL HEAP [OK]',
+    'COMPILING SHADERS & RUNTIME [OK]',
+    'CALIBRATING SPATIAL RADIANCE MATRIX',
+    'PRE-WARMING AUDIO ENGINE [OK]',
     'SYNCHRONIZING ZERO-ALLOCATION CONSENSUS',
-    'PRE-WARMING AUDIO SYNTHESIS ENGINE [OK]',
-    'PREPARING KINETIC BRUTALIST ARCHITECTURE',
-    'STENCIL LAYER MASK PREPARED // APERTURE ARMED',
-    'SYSTEM READY // TRIGGERING UNMASK SEQUENCE'
+    'PREPARING KINETIC BRUTALIST PORTFOLIO',
+    'UNMASK SEQUENCE ARMED // READY'
   ];
 
-  // Progress counter simulation
+  // Smooth loading progression
   useEffect(() => {
     let current = 0;
     const interval = setInterval(() => {
@@ -34,75 +33,75 @@ export function CyberpunkLoader({ onComplete }: CyberpunkLoaderProps) {
         return;
       }
 
-      // Non-linear cyberpunk loading cadence
-      const increment = current < 30 ? Math.floor(Math.random() * 8) + 4
-        : current < 70 ? Math.floor(Math.random() * 12) + 6
-        : current < 90 ? Math.floor(Math.random() * 6) + 3
+      // Smooth, natural increments
+      const increment = current < 40 ? Math.floor(Math.random() * 8) + 4
+        : current < 75 ? Math.floor(Math.random() * 10) + 5
+        : current < 92 ? Math.floor(Math.random() * 6) + 3
         : Math.floor(Math.random() * 4) + 2;
 
       current = Math.min(current + increment, 100);
       setProgress(current);
 
-      // Advance log entries in sync with progress
       const targetLog = Math.min(
         Math.floor((current / 100) * BOOT_LOGS.length),
         BOOT_LOGS.length - 1
       );
       setLogIndex(targetLog);
 
-      if (current % 18 === 0) {
+      if (current % 20 === 0) {
         sound.play('click');
       }
 
       if (current >= 100) {
         clearInterval(interval);
-        triggerCutoutTransition();
+        triggerZoomTransition();
       }
-    }, 45);
+    }, 40);
 
     return () => clearInterval(interval);
   }, []);
 
-  const triggerCutoutTransition = () => {
-    if (phase !== 'booting') return;
+  // Trigger the clean letter 'A' zoom mask transition
+  const triggerZoomTransition = () => {
+    if (isZooming) return;
+    setIsZooming(true);
     sound.play('glitch');
-    setPhase('cutting');
 
-    // Mechanical audio cue for the cut-out unmask
+    // Mechanical unmask sound cue
     setTimeout(() => {
       sound.play('heavy');
       sound.startAmbience();
-    }, 100);
+    }, 70);
 
-    // Expand the cut-out aperture layer mask
-    const timer1 = setTimeout(() => {
-      setCutoutScale(1);
-    }, 40);
+    // Expand the exact same letter 'A'
+    requestAnimationFrame(() => {
+      setZoomScale(36);
+    });
 
-    const timer2 = setTimeout(() => {
-      setCutoutScale(2);
-    }, 280);
+    // Fade dark overlay near the end of zoom for seamless handoff
+    const fadeTimer = setTimeout(() => {
+      setOverlayOpacity(0);
+    }, 460);
 
-    const timer3 = setTimeout(() => {
-      setPhase('done');
+    // Complete transition and unmount loader
+    const finishTimer = setTimeout(() => {
       onComplete();
-    }, 700);
+    }, 740);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
+      clearTimeout(fadeTimer);
+      clearTimeout(finishTimer);
     };
   };
 
   const handleSkip = () => {
-    if (phase !== 'booting') return;
+    if (isZooming) return;
     isSkippedRef.current = true;
     setProgress(100);
-    triggerCutoutTransition();
+    triggerZoomTransition();
   };
 
-  // Keyboard escape shortcut to skip
+  // Keyboard shortcut to skip
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -111,204 +110,210 @@ export function CyberpunkLoader({ onComplete }: CyberpunkLoaderProps) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [phase]);
+  }, [isZooming]);
 
-  if (phase === 'done') return null;
-
-  const totalBlocks = 24;
+  const totalBlocks = 20;
   const activeBlocks = Math.floor((progress / 100) * totalBlocks);
 
   return (
     <div className="fixed inset-0 z-[100] overflow-hidden select-none pointer-events-auto bg-transparent">
       {/* 
-        CUT-OUT LAYER MASK IMPLEMENTATION:
-        The 4 corner blades slice outward from the central aperture cut-out,
-        revealing the interactive portfolio website underneath.
+        SVG MASK LAYER:
+        The dark #0a0a0a overlay covers the screen.
+        The exact letter 'A' in the center acts as the cut-out mask.
+        When loading finishes, that same 'A' scales from 1 to 36,
+        smoothly revealing the homepage through the opening of the 'A'.
       */}
-
-      {/* TOP-LEFT BLADE */}
-      <div
-        className={`absolute top-0 left-0 w-1/2 h-1/2 bg-[#080808] border-r border-b border-[#2a2a2a] transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] ${
-          phase === 'cutting' && cutoutScale >= 1
-            ? '-translate-x-full -translate-y-full opacity-0'
-            : 'translate-x-0 translate-y-0 opacity-100'
-        }`}
-      />
-
-      {/* TOP-RIGHT BLADE */}
-      <div
-        className={`absolute top-0 right-0 w-1/2 h-1/2 bg-[#080808] border-l border-b border-[#2a2a2a] transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] ${
-          phase === 'cutting' && cutoutScale >= 1
-            ? 'translate-x-full -translate-y-full opacity-0'
-            : 'translate-x-0 translate-y-0 opacity-100'
-        }`}
-      />
-
-      {/* BOTTOM-LEFT BLADE */}
-      <div
-        className={`absolute bottom-0 left-0 w-1/2 h-1/2 bg-[#080808] border-r border-t border-[#2a2a2a] transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] ${
-          phase === 'cutting' && cutoutScale >= 1
-            ? '-translate-x-full translate-y-full opacity-0'
-            : 'translate-x-0 translate-y-0 opacity-100'
-        }`}
-      />
-
-      {/* BOTTOM-RIGHT BLADE */}
-      <div
-        className={`absolute bottom-0 right-0 w-1/2 h-1/2 bg-[#080808] border-l border-t border-[#2a2a2a] transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] ${
-          phase === 'cutting' && cutoutScale >= 1
-            ? 'translate-x-full translate-y-full opacity-0'
-            : 'translate-x-0 translate-y-0 opacity-100'
-        }`}
-      />
-
-      {/* CUT-OUT APERTURE FRAME (Expanding neon laser stencil boundary) */}
-      {phase === 'cutting' && (
-        <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-500 ease-out z-30 ${
-            cutoutScale === 1
-              ? 'w-[85vw] h-[75vh] border-4 border-[#d4ff00] shadow-[0_0_60px_#d4ff00] opacity-100'
-              : 'w-[180vw] h-[180vh] border-8 border-[#00f0ff] opacity-0'
-          }`}
-        >
-          {/* Laser Cut Crosshairs at 4 corners */}
-          <div className="absolute top-0 left-0 -translate-x-3 -translate-y-3 font-mono text-sm text-[#d4ff00] font-bold">
-            [+]
-          </div>
-          <div className="absolute top-0 right-0 translate-x-3 -translate-y-3 font-mono text-sm text-[#d4ff00] font-bold">
-            [+]
-          </div>
-          <div className="absolute bottom-0 left-0 -translate-x-3 translate-y-3 font-mono text-sm text-[#d4ff00] font-bold">
-            [+]
-          </div>
-          <div className="absolute bottom-0 right-0 translate-x-3 translate-y-3 font-mono text-sm text-[#d4ff00] font-bold">
-            [+]
-          </div>
-          <div className="absolute top-3 left-3 bg-[#0a0a0a] border border-[#d4ff00] px-2 py-0.5 font-mono text-[10px] text-[#d4ff00] uppercase tracking-widest">
-            STENCIL UNMASK: 100% REVEAL
-          </div>
-        </div>
-      )}
-
-      {/* CYBERPUNK HUD OVERLAY CONTENT */}
-      <div
-        className={`relative z-20 w-full h-full flex flex-col justify-between p-6 sm:p-10 transition-opacity duration-300 ${
-          phase === 'cutting' ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'
-        }`}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="xMidYMid slice"
+        style={{
+          opacity: overlayOpacity,
+          transition: 'opacity 0.28s ease-out'
+        }}
       >
-        {/* Top HUD Telemetry Toolbar */}
-        <div className="flex items-center justify-between border-b border-[#2a2a2a] pb-4 font-mono text-xs text-[#8e8e8e]">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 bg-[#d4ff00] animate-pulse"></span>
-            <span className="text-[#f5f5f5] font-bold uppercase tracking-wider">
-              ARVIND.SYS // BOOTLOADER v4.2
-            </span>
-            <span className="hidden md:inline text-[#2a2a2a]">|</span>
-            <span className="hidden md:inline uppercase text-[#8e8e8e]">
-              CHENNAI STATION [13.0827° N, 80.2707° E]
-            </span>
-          </div>
+        <defs>
+          <mask id="clean-letter-a-mask">
+            {/* White keeps the dark overlay solid */}
+            <rect x="-500" y="-500" width="2000" height="2000" fill="white" />
 
-          <div className="flex items-center gap-4">
-            <span className="hidden sm:inline text-[#d4ff00] uppercase font-bold">
-              STATUS: INITIALIZING
-            </span>
-            <button
-              onClick={handleSkip}
-              className="border border-[#2a2a2a] hover:border-[#d4ff00] bg-[#121212] px-3 py-1 font-mono text-xs text-[#f5f5f5] hover:text-[#d4ff00] uppercase transition-colors cursor-pointer flex items-center gap-1.5"
-            >
-              <span>SKIP BOOT</span>
-              <span>[ESC ↗]</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Center Cyberpunk Reactor & Loading Matrix */}
-        <div className="my-auto max-w-2xl mx-auto w-full flex flex-col items-center text-center px-4">
-          {/* Animated Cyber Reactor Monogram */}
-          <div className="relative w-28 h-28 sm:w-36 sm:h-36 mb-8 flex items-center justify-center">
-            {/* Outer Rotating Segmented Dashed Ring */}
-            <div className="absolute inset-0 border-2 border-dashed border-[#d4ff00] animate-spin-turntable opacity-80" />
-
-            {/* Middle Inverted Rotating Ring */}
-            <div
-              className="absolute inset-2 border-2 border-dotted border-[#00f0ff] opacity-60"
-              style={{ animation: 'spin-turntable 8s linear infinite reverse' }}
-            />
-
-            {/* Corner Crosshairs */}
-            <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-[#ff007f]" />
-            <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-[#ff007f]" />
-            <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-[#ff007f]" />
-            <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-[#ff007f]" />
-
-            {/* Center Monogram / Reactor Core */}
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#121212] border-2 border-[#f5f5f5] flex items-center justify-center font-syne font-black text-2xl sm:text-3xl text-[#d4ff00] shadow-[0_0_20px_rgba(212,255,0,0.3)]">
-              A
-            </div>
-          </div>
-
-          {/* Large Digital Numerals */}
-          <div className="flex items-baseline justify-center gap-2 mb-3">
-            <span className="font-syne font-black text-6xl sm:text-8xl tracking-tighter text-[#f5f5f5] tabular-nums">
-              {String(progress).padStart(3, '0')}
-            </span>
-            <span className="font-mono text-2xl sm:text-3xl font-bold text-[#d4ff00]">
-              %
-            </span>
-          </div>
-
-          <div className="font-mono text-xs uppercase tracking-widest text-[#8e8e8e] mb-6 flex items-center gap-2">
-            <span className="text-[#00f0ff]">[SYSTEM CHECK]</span>
-            <span>CALIBRATING COMPUTER SCIENCE MATRIX</span>
-          </div>
-
-          {/* Segmented Brutalist Progress Bar */}
-          <div className="w-full max-w-lg bg-[#0e0e0e] border-2 border-[#2a2a2a] p-1.5 shadow-[4px_4px_0px_#000000]">
-            <div
-              className="gap-1 h-5"
+            {/* 
+              Black Letter 'A' cuts a transparent window revealing the homepage.
+              Scales up from the exact center (500, 500).
+            */}
+            <g
               style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${totalBlocks}, minmax(0, 1fr))`
+                transformOrigin: '500px 500px',
+                transform: `scale(${zoomScale})`,
+                transition: isZooming
+                  ? 'transform 0.72s cubic-bezier(0.7, 0, 0.2, 1)'
+                  : 'none'
               }}
             >
-              {Array.from({ length: totalBlocks }).map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-full transition-colors duration-75 ${
-                    idx < activeBlocks
-                      ? 'bg-[#d4ff00] shadow-[0_0_6px_#d4ff00]'
-                      : 'bg-[#181818]'
-                  }`}
-                />
-              ))}
-            </div>
+              <text
+                x="500"
+                y="500"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontFamily="var(--font-syne), 'Syne', sans-serif"
+                fontWeight="900"
+                fontSize="96"
+                fill={isZooming ? 'black' : 'white'}
+              >
+                A
+              </text>
+            </g>
+          </mask>
+        </defs>
+
+        {/* Dark overlay masked by the letter 'A' */}
+        <rect
+          x="-500"
+          y="-500"
+          width="2000"
+          height="2000"
+          fill="#0a0a0a"
+          mask="url(#clean-letter-a-mask)"
+        />
+
+        {/* 
+          Visible Letter 'A':
+          During booting: solid electric lime #d4ff00.
+          During zoom: switches to a luminous lime laser outline as the home page is unveiled inside it.
+        */}
+        <g
+          style={{
+            transformOrigin: '500px 500px',
+            transform: `scale(${zoomScale})`,
+            transition: isZooming
+              ? 'transform 0.72s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.35s ease-out'
+              : 'none',
+            opacity: isZooming && zoomScale > 14 ? 0 : 1
+          }}
+        >
+          {isZooming ? (
+            <text
+              x="500"
+              y="500"
+              textAnchor="middle"
+              dominantBaseline="central"
+              fontFamily="var(--font-syne), 'Syne', sans-serif"
+              fontWeight="900"
+              fontSize="96"
+              fill="none"
+              stroke="#d4ff00"
+              strokeWidth="2.5"
+              style={{ filter: 'drop-shadow(0 0 14px #d4ff00)' }}
+            >
+              A
+            </text>
+          ) : (
+            <text
+              x="500"
+              y="500"
+              textAnchor="middle"
+              dominantBaseline="central"
+              fontFamily="var(--font-syne), 'Syne', sans-serif"
+              fontWeight="900"
+              fontSize="96"
+              fill="#d4ff00"
+              style={{ filter: 'drop-shadow(0 0 10px rgba(212,255,0,0.35))' }}
+            >
+              A
+            </text>
+          )}
+        </g>
+      </svg>
+
+      {/* 
+        CLEAN, AESTHETIC CYBERPUNK HUD
+      */}
+      <div className="relative z-20 w-full h-full flex flex-col justify-between p-6 sm:p-10 pointer-events-none">
+        {/* Top Minimal Telemetry Bar */}
+        <div
+          className={`flex items-center justify-between border-b border-[#1c1c1c] pb-4 font-mono text-xs text-[#8e8e8e] transition-opacity duration-200 pointer-events-auto ${
+            isZooming ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 bg-[#d4ff00] animate-pulse"></span>
+            <span className="text-[#f5f5f5] font-bold tracking-widest uppercase">
+              ARVIND.SYS // BOOTLOADER
+            </span>
+            <span className="hidden sm:inline text-[#3a3a3a]">|</span>
+            <span className="hidden sm:inline text-[#8e8e8e] uppercase">
+              CHENNAI [13.0827° N, 80.2707° E]
+            </span>
           </div>
 
-          {/* Live Terminal Log Stream */}
-          <div className="w-full max-w-lg mt-6 bg-[#0e0e0e] border border-[#2a2a2a] p-3 text-left font-mono text-[11px] text-[#c5c9ac] flex items-center justify-between">
-            <div className="flex items-center gap-2 overflow-hidden truncate">
-              <span className="text-[#d4ff00] font-bold">›</span>
-              <span className="truncate">{BOOT_LOGS[logIndex]}</span>
-            </div>
-            <span className="text-[#8e8e8e] shrink-0 text-[10px] ml-2">
-              [{logIndex + 1}/{BOOT_LOGS.length}]
+          <button
+            onClick={handleSkip}
+            className="border border-[#2a2a2a] hover:border-[#d4ff00] bg-[#121212] px-3 py-1 font-mono text-[11px] text-[#f5f5f5] hover:text-[#d4ff00] uppercase transition-colors cursor-pointer"
+          >
+            SKIP [ESC ↗]
+          </button>
+        </div>
+
+        {/* 
+          Center Reticle framing that exact small 'A'
+        */}
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 pointer-events-none transition-all duration-200 ${
+            isZooming ? 'opacity-0 scale-90' : 'opacity-100 scale-100'
+          }`}
+        >
+          <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-[#d4ff00]" />
+          <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-[#d4ff00]" />
+          <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l border-[#d4ff00]" />
+          <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r border-[#d4ff00]" />
+        </div>
+
+        {/* 
+          Loading metrics & progress bar directly below the small 'A'
+        */}
+        <div
+          className={`absolute top-[calc(50%+64px)] left-1/2 -translate-x-1/2 w-full max-w-xs flex flex-col items-center transition-all duration-200 pointer-events-none ${
+            isZooming ? 'opacity-0 translate-y-3' : 'opacity-100 translate-y-0'
+          }`}
+        >
+          {/* Digital Percentage Numbers */}
+          <div className="flex items-baseline justify-center gap-1.5 mb-2 font-mono">
+            <span className="font-syne font-black text-3xl sm:text-4xl tracking-tighter text-[#f5f5f5] tabular-nums">
+              {String(progress).padStart(3, '0')}
             </span>
+            <span className="text-sm font-bold text-[#d4ff00]">%</span>
+          </div>
+
+          {/* Clean Segmented Progress Bar */}
+          <div className="w-56 h-1.5 bg-[#121212] border border-[#2a2a2a] p-0.5 mb-3 flex gap-0.5">
+            {Array.from({ length: totalBlocks }).map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-full flex-1 transition-colors duration-75 ${
+                  idx < activeBlocks
+                    ? 'bg-[#d4ff00]'
+                    : 'bg-transparent'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Single Clean Terminal Log Line */}
+          <div className="font-mono text-[10px] text-[#8e8e8e] tracking-widest uppercase truncate max-w-[280px]">
+            <span className="text-[#d4ff00] mr-1.5">›</span>
+            <span>{BOOT_LOGS[logIndex]}</span>
           </div>
         </div>
 
-        {/* Bottom Status Ticker */}
-        <div className="flex flex-wrap items-center justify-between border-t border-[#2a2a2a] pt-4 font-mono text-[11px] text-[#8e8e8e] gap-2">
-          <div className="flex items-center gap-3">
-            <span>MEM: 64TB ALLOCATED</span>
-            <span>·</span>
-            <span>GPU: VK_SPATIAL_RADIANCE</span>
-            <span>·</span>
-            <span>CONSENSUS: READY</span>
-          </div>
-          <div className="text-[#c5c9ac]">
-            PRESS <kbd className="border border-[#3a3a3a] px-1 py-0.5 text-[#d4ff00]">ESC</kbd> TO SKIP
-          </div>
+        {/* Bottom Status Line */}
+        <div
+          className={`flex items-center justify-between border-t border-[#1c1c1c] pt-4 font-mono text-[10px] text-[#8e8e8e] tracking-wider uppercase transition-opacity duration-200 ${
+            isZooming ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <span>MEM: 64TB // SPATIAL MATRIX</span>
+          <span className="hidden sm:inline">ZERO-ALLOCATION CONSENSUS // READY</span>
         </div>
       </div>
     </div>
